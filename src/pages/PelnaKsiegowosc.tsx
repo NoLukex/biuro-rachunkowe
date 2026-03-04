@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { CheckCircle2, FileText, Shield, TrendingUp, ArrowRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { SITE_CONFIG } from '../constants';
+import { Link } from 'react-router-dom';
 
 export function PelnaKsiegowosc() {
   return (
@@ -13,7 +14,7 @@ export function PelnaKsiegowosc() {
           className="max-w-3xl mx-auto text-center mb-16"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Pełna Księgowość dla Spółek w {SITE_CONFIG.city}
+            Pełna księgowość dla spółek w {SITE_CONFIG.cityForms.locative}
           </h1>
           <p className="text-xl text-slate-600">
             Bezpieczeństwo zarządu, przejrzyste raporty i optymalizacja podatkowa.
@@ -60,21 +61,21 @@ export function PelnaKsiegowosc() {
               <div className="flex gap-4">
                 <Shield className="w-8 h-8 text-blue-600 shrink-0" />
                 <div>
-                  <h3 className="font-semibold mb-1">Bezpieczeństwo Zarządu</h3>
+                  <h3 className="font-semibold mb-1">Bezpieczeństwo zarządu</h3>
                   <p className="text-sm text-slate-600">Chronimy Cię przed odpowiedzialnością karnoskarbową dzięki rygorystycznym procedurom.</p>
                 </div>
               </div>
               <div className="flex gap-4">
                 <TrendingUp className="w-8 h-8 text-blue-600 shrink-0" />
                 <div>
-                  <h3 className="font-semibold mb-1">Raporty Zarządcze</h3>
+                  <h3 className="font-semibold mb-1">Raporty zarządcze</h3>
                   <p className="text-sm text-slate-600">Co miesiąc widzisz, na czym dokładnie zarabiasz i gdzie uciekają koszty.</p>
                 </div>
               </div>
               <div className="flex gap-4">
                 <FileText className="w-8 h-8 text-blue-600 shrink-0" />
                 <div>
-                  <h3 className="font-semibold mb-1">Optymalizacja Wypłat</h3>
+                  <h3 className="font-semibold mb-1">Optymalizacja wypłat</h3>
                   <p className="text-sm text-slate-600">Doradzamy, jak legalnie i najtaniej wypłacać środki ze spółki.</p>
                 </div>
               </div>
@@ -86,8 +87,8 @@ export function PelnaKsiegowosc() {
           <h2 className="text-3xl font-bold text-center mb-12">Przebieg współpracy</h2>
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { step: '01', title: 'Dedykowana Księgowa', desc: 'Otrzymujesz jednego, stałego opiekuna, który zna Twój biznes.' },
-              { step: '02', title: 'Obieg Dokumentów', desc: 'Wgrywasz faktury przez aplikację (OCR). Zero papieru.' },
+              { step: '01', title: 'Dedykowana księgowa', desc: 'Otrzymujesz jednego, stałego opiekuna, który zna Twój biznes.' },
+              { step: '02', title: 'Obieg dokumentów', desc: 'Wgrywasz faktury przez aplikację (OCR). Zero papieru.' },
               { step: '03', title: 'Raportowanie', desc: 'Do 15. dnia miesiąca otrzymujesz pełny raport finansowy.' },
               { step: '04', title: 'Podatki', desc: 'Akceptujesz wyliczenia i robisz przelewy podatkowe jednym kliknięciem.' }
             ].map((item, i) => (
@@ -114,9 +115,9 @@ export function PelnaKsiegowosc() {
             Wycena indywidualna w 24h.
           </p>
           <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white text-lg h-14 px-8" asChild>
-            <a href="/#kontakt">
+            <Link to={{ pathname: '/', hash: '#kontakt' }}>
               Umów darmową wycenę <ArrowRight className="ml-2 w-5 h-5" />
-            </a>
+            </Link>
           </Button>
         </div>
       </div>

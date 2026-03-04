@@ -4,45 +4,39 @@ import { Star, Building2, Clock, FileCheck2 } from 'lucide-react';
 const testimonials = [
   {
     company: 'TechFlow Sp. z o.o.',
-    quote: 'Przeszedłem do Ashen po tym, jak poprzednie biuro naraziło mnie na karę z US. Zespół przeprowadził audyt, wyprostował dokumenty i wdrożył panel online. Teraz oszczędzam 15% na podatkach i mam święty spokój.',
+    quote: 'Po zmianie biura uporządkowaliśmy dokumenty i proces raportowania. Mamy jasny harmonogram działań i szybki kontakt z księgową.',
     author: 'Michał Kowalski, CEO',
-    avatar: 'https://api.dicebear.com/9.x/initials/svg?seed=TechFlow&backgroundColor=1e40af',
   },
   {
     company: 'E-commerce Plus',
-    quote: 'Mieliśmy problem z tysiącami faktur miesięcznie i ciągłymi błędami w KPiR. Wdrożyli nam pełną automatyzację i integrację z BaseLinkerem. Od 2 lat zero błędów i pełna kontrola nad marżą.',
+    quote: 'Przy dużej liczbie faktur dostaliśmy stabilny obieg dokumentów i lepszą przewidywalność rozliczeń. Zespół reaguje szybko przy zmianach.',
     author: 'Anna Nowak, Właścicielka',
-    avatar: 'https://api.dicebear.com/9.x/initials/svg?seed=Ecommerce&backgroundColor=047857',
   },
   {
     company: 'Studio Architektoniczne',
-    quote: 'Płaciliśmy ogromne podatki na liniówce. Po darmowej konsultacji przeszliśmy na ryczałt. Proces zmiany biura trwał 2 dni. Zyskaliśmy kilkadziesiąt tysięcy złotych rocznie w kieszeni.',
+    quote: 'Konsultacja pomogła nam dobrać lepszy model rozliczeń. Przejście do nowego biura było sprawne i bez przestojów operacyjnych.',
     author: 'Piotr Wiśniewski, Architekt',
-    avatar: 'https://api.dicebear.com/9.x/initials/svg?seed=Studio&backgroundColor=be185d',
   },
   {
     company: 'Agencja Marketingowa',
-    quote: 'Gubiliśmy papierowe faktury kosztowe, co miesiąc był stres. Teraz skanuję wszystko aplikacją mobilną w biegu. Księgowa ma je od razu u siebie. Koniec z papierologią i stresem 20-go.',
-    author: 'Katarzyna Lewandowska, Founder',
-    avatar: 'https://api.dicebear.com/9.x/initials/svg?seed=Agencja&backgroundColor=b45309',
+    quote: 'Przenieśliśmy obieg dokumentów do online i skończyły się nerwowe końcówki miesiąca. Cały proces jest teraz bardziej przewidywalny.',
+    author: 'Katarzyna Lewandowska, założycielka',
   },
   {
     company: 'Janusz-Pol Transport',
-    quote: 'Bałem się wdrożenia KSeF-u i kar z tym związanych. Zespół Ashen wytłumaczył mi wszystko krok po kroku i skonfigurował system. Teraz wystawianie faktur jest nawet wygodniejsze niż kiedyś.',
+    quote: 'Przy wdrożeniu KSeF dostaliśmy konkretny plan działania i wsparcie zespołu. Dzisiaj proces fakturowania jest dla nas prostszy.',
     author: 'Janusz Dąbrowski, Właściciel',
-    avatar: 'https://api.dicebear.com/9.x/initials/svg?seed=Janusz&backgroundColor=4338ca',
   },
   {
     company: 'IT Consulting',
-    quote: 'Szukałem biura, które rozumie specyfikę pracy programisty B2B. Ich panel klienta i powiadomienia SMS o podatkach to mistrzostwo. Zawsze wiem, ile i kiedy zapłacić ZUS.',
-    author: 'Tomasz Zieliński, B2B',
-    avatar: 'https://api.dicebear.com/9.x/initials/svg?seed=IT&backgroundColor=334155',
+    quote: 'Doceniam przejrzystą komunikację i jasne informacje o terminach. Dzięki temu łatwiej planuję płynność finansową firmy.',
+    author: 'Tomasz Zieliński, konsultant B2B',
   },
 ];
 
 export function Testimonials() {
   return (
-    <section className="py-24 bg-white" id="opinie">
+    <section className="py-24 bg-slate-100" id="opinie">
       <div className="container mx-auto px-4 md:px-6">
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
@@ -55,7 +49,7 @@ export function Testimonials() {
             <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600">
               <Building2 size={32} strokeWidth={1.5} />
             </div>
-            <div className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight">1240+</div>
+            <div className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight">350+</div>
             <div className="text-lg text-slate-600 font-medium">Obsługiwanych firm</div>
           </motion.div>
           <motion.div
@@ -68,7 +62,7 @@ export function Testimonials() {
             <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600">
               <Clock size={32} strokeWidth={1.5} />
             </div>
-            <div className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight">98%</div>
+            <div className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight">97%</div>
             <div className="text-lg text-slate-600 font-medium">Terminowość rozliczeń</div>
           </motion.div>
           <motion.div
@@ -81,17 +75,17 @@ export function Testimonials() {
             <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-blue-600">
               <FileCheck2 size={32} strokeWidth={1.5} />
             </div>
-            <div className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight">2.3M+</div>
+            <div className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight">420k+</div>
             <div className="text-lg text-slate-600 font-medium">Przetworzonych faktur KSeF</div>
           </motion.div>
         </div>
 
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
-            Zaufali nam najlepsi
+            Co mówią nasi klienci
           </h2>
           <p className="text-lg text-slate-600">
-            Zobacz, co mówią o nas klienci, którzy już przeszli z nami rewolucję KSeF.
+            Opinie klientów o codziennej współpracy, komunikacji i jakości obsługi księgowej.
           </p>
         </div>
 
@@ -104,7 +98,7 @@ export function Testimonials() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-slate-50 p-8 rounded-3xl border border-slate-100 flex flex-col hover:shadow-lg transition-shadow duration-300"
+              className="bg-white p-8 rounded-3xl border border-slate-200 flex flex-col hover:shadow-lg transition-shadow duration-300"
             >
               <div className="flex gap-1 mb-6">
                 {[...Array(5)].map((_, i) => (
@@ -115,12 +109,13 @@ export function Testimonials() {
                 "{testimonial.quote}"
               </blockquote>
               <div className="flex items-center gap-4 pt-6 border-t border-slate-200">
-                <img 
-                  src={testimonial.avatar} 
-                  alt={testimonial.company} 
-                  className="w-12 h-12 rounded-full shadow-sm"
-                  referrerPolicy="no-referrer"
-                />
+                <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-700 font-bold text-sm flex items-center justify-center shadow-sm">
+                  {testimonial.company
+                    .split(' ')
+                    .map((word) => word[0])
+                    .join('')
+                    .slice(0, 2)}
+                </div>
                 <div>
                   <div className="font-bold text-slate-900">{testimonial.company}</div>
                   <div className="text-sm text-slate-500">{testimonial.author}</div>

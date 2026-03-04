@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -9,12 +10,19 @@ import { Label } from '@/src/components/ui/label';
 import { SITE_CONFIG } from '@/src/constants';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { toast } from 'sonner';
+import { submitContact } from '@/src/lib/contact';
+import { Link } from 'react-router-dom';
 
 const contactSchema = z.object({
   name: z.string().min(2, { message: 'Imię musi mieć co najmniej 2 znaki' }),
   phone: z.string().min(9, { message: 'Podaj prawidłowy numer telefonu' }),
   email: z.string().email({ message: 'Podaj prawidłowy adres email' }),
   message: z.string().min(10, { message: 'Wiadomość musi mieć co najmniej 10 znaków' }),
+  consent: z.boolean().refine((value) => value, {
+    message: 'Musisz zaakceptować politykę prywatności.',
+  }),
+  website: z.string().max(0),
+  formStartedAt: z.string().min(1),
 });
 
 type ContactFormValues = z.infer<typeof contactSchema>;
@@ -23,19 +31,67 @@ export function Contact() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
+    defaultValues: {
+      consent: false,
+      website: '',
+      formStartedAt: String(Date.now()),
+    },
   });
 
+  useEffect(() => {
+    const pricingHint = sessionStorage.getItem('pricing_calculator_hint');
+    const articleHint = sessionStorage.getItem('knowledge_article_hint');
+    const hint = articleHint || pricingHint;
+
+    if (hint) {
+      setValue('message', hint, { shouldDirty: true, shouldTouch: true });
+      sessionStorage.removeItem('pricing_calculator_hint');
+      sessionStorage.removeItem('knowledge_article_hint');
+    }
+  }, [setValue]);
+
   const onSubmit = async (data: ContactFormValues) => {
-    console.log('Form data:', data);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    toast.success('Wiadomość została wysłana!', {
-      description: 'Skontaktujemy się z Tobą wkrótce.',
-    });
-    reset();
+    const startedAt = Number(data.formStartedAt || 0);
+    const secondsElapsed = Number.isFinite(startedAt)
+      ? (Date.now() - startedAt) / 1000
+      : 0;
+
+    if (data.website) {
+      return;
+    }
+
+    if (secondsElapsed > 0 && secondsElapsed < 2) {
+      toast.error('Wysyłka zatrzymana przez filtr antyspamowy.');
+      return;
+    }
+
+    const lastSubmitAt = Number(sessionStorage.getItem('contact_last_submit_at') || 0);
+    if (Date.now() - lastSubmitAt < 15000) {
+      toast.error('Poczekaj chwilę przed ponowną wysyłką.');
+      return;
+    }
+
+    try {
+      await submitContact(data);
+      sessionStorage.setItem('contact_last_submit_at', String(Date.now()));
+      toast.success('Wiadomość została wysłana!', {
+        description: 'Skontaktujemy się z Tobą w najbliższym czasie.',
+      });
+      reset({
+        consent: false,
+        website: '',
+        formStartedAt: String(Date.now()),
+      });
+    } catch {
+      toast.error('Nie udało się wysłać formularza.', {
+        description: 'Spróbuj ponownie albo skontaktuj się telefonicznie.',
+      });
+    }
   };
 
   return (
@@ -55,6 +111,15 @@ export function Contact() {
             <p className="text-lg text-slate-600 mb-10 leading-relaxed">
               Umów się na darmową, 15-minutową konsultację. Sprawdzimy, jak możemy zoptymalizować Twoje podatki i przygotować Cię na KSeF.
             </p>
+
+            <div className="rounded-2xl border border-blue-100 bg-blue-50 p-5 mb-10">
+              <h4 className="font-semibold text-slate-900 mb-3">Co otrzymasz po konsultacji?</h4>
+              <ul className="space-y-2 text-sm text-slate-700">
+                <li>• Rekomendowany model współpracy dopasowany do Twojej firmy</li>
+                <li>• Orientacyjny zakres i koszt obsługi</li>
+                <li>• Listę najbliższych kroków wdrożeniowych (KSeF, kadry, podatki)</li>
+              </ul>
+            </div>
 
             <div className="flex flex-col gap-8">
               <div className="flex items-start gap-4">
@@ -112,9 +177,15 @@ export function Contact() {
                   id="name"
                   placeholder="Jan Kowalski"
                   {...register('name')}
+                  aria-invalid={errors.name ? 'true' : 'false'}
+                  aria-describedby={errors.name ? 'name-error' : undefined}
                   className={errors.name ? 'border-red-500 focus-visible:ring-red-500' : ''}
                 />
-                {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
+                {errors.name && (
+                  <p id="name-error" className="text-sm text-red-500" role="alert">
+                    {errors.name.message}
+                  </p>
+                )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -125,9 +196,15 @@ export function Contact() {
                     type="tel"
                     placeholder="123 456 789"
                     {...register('phone')}
+                    aria-invalid={errors.phone ? 'true' : 'false'}
+                    aria-describedby={errors.phone ? 'phone-error' : undefined}
                     className={errors.phone ? 'border-red-500 focus-visible:ring-red-500' : ''}
                   />
-                  {errors.phone && <p className="text-sm text-red-500">{errors.phone.message}</p>}
+                  {errors.phone && (
+                    <p id="phone-error" className="text-sm text-red-500" role="alert">
+                      {errors.phone.message}
+                    </p>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
@@ -136,9 +213,15 @@ export function Contact() {
                     type="email"
                     placeholder="jan@firma.pl"
                     {...register('email')}
+                    aria-invalid={errors.email ? 'true' : 'false'}
+                    aria-describedby={errors.email ? 'email-error' : undefined}
                     className={errors.email ? 'border-red-500 focus-visible:ring-red-500' : ''}
                   />
-                  {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+                  {errors.email && (
+                    <p id="email-error" className="text-sm text-red-500" role="alert">
+                      {errors.email.message}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -149,15 +232,54 @@ export function Contact() {
                   placeholder="Opisz krótko, jakiej pomocy potrzebujesz..."
                   className={`min-h-[120px] resize-none ${errors.message ? 'border-red-500 focus-visible:ring-red-500' : ''}`}
                   {...register('message')}
+                  aria-invalid={errors.message ? 'true' : 'false'}
+                  aria-describedby={errors.message ? 'message-error' : undefined}
                 />
-                {errors.message && <p className="text-sm text-red-500">{errors.message.message}</p>}
+                {errors.message && (
+                  <p id="message-error" className="text-sm text-red-500" role="alert">
+                    {errors.message.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="hidden" aria-hidden="true">
+                <Label htmlFor="website">Strona internetowa</Label>
+                <Input id="website" autoComplete="off" tabIndex={-1} {...register('website')} />
+              </div>
+              <input type="hidden" {...register('formStartedAt')} />
+
+              <div className="space-y-2">
+                <label className="flex items-start gap-3 text-sm text-slate-600">
+                  <input
+                    type="checkbox"
+                    className="mt-0.5 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-600"
+                    {...register('consent')}
+                    aria-invalid={errors.consent ? 'true' : 'false'}
+                    aria-describedby={errors.consent ? 'consent-error' : undefined}
+                  />
+                  <span>
+                    Wyrażam zgodę na kontakt w celu obsługi zapytania i potwierdzam zapoznanie z{' '}
+                    <Link to="/polityka-prywatnosci" className="text-blue-600 hover:text-blue-700 underline">
+                      polityką prywatności
+                    </Link>
+                    .
+                  </span>
+                </label>
+                {errors.consent && (
+                  <p id="consent-error" className="text-sm text-red-500" role="alert">
+                    {errors.consent.message}
+                  </p>
+                )}
               </div>
 
               <Button type="submit" size="lg" className="w-full h-14 text-base font-semibold bg-blue-600 hover:bg-blue-700 text-white" disabled={isSubmitting}>
                 {isSubmitting ? 'Wysyłanie...' : 'Wyślij zapytanie'}
               </Button>
               <p className="text-xs text-slate-500 text-center mt-4">
-                Wysyłając formularz, akceptujesz naszą Politykę Prywatności.
+                Jeśli nie skonfigurujesz endpointu formularza, zapytanie otworzy się w Twoim kliencie poczty.
+              </p>
+              <p className="text-xs text-slate-500 text-center">
+                Odpowiadamy zwykle w ciągu 24 godzin roboczych.
               </p>
             </form>
           </motion.div>

@@ -4,23 +4,23 @@ import { ShieldCheck, RotateCcw, AlertCircle, Ban } from 'lucide-react';
 const guarantees = [
   {
     icon: RotateCcw,
-    title: 'Zwrot 100% w 30 dni',
-    description: 'Jeśli nie będziesz zadowolony z naszych usług w pierwszym miesiącu, oddamy Ci pieniądze bez pytań.',
+    title: 'Satysfakcja w pierwszym miesiącu',
+    description: 'Wdrożenie prowadzimy etapami, aby już w pierwszym miesiącu uporządkować obieg dokumentów i komunikację.',
   },
   {
     icon: ShieldCheck,
-    title: 'OC na 2 000 000 zł',
-    description: 'Posiadamy ubezpieczenie od odpowiedzialności cywilnej na kwotę 2 milionów złotych.',
+    title: 'Polisa OC biura',
+    description: 'Zakres i suma gwarancyjna polisy powinny być podane zgodnie z realnymi danymi klienta.',
   },
   {
     icon: AlertCircle,
-    title: 'Odpowiedzialność za błędy',
-    description: 'Bierzemy pełną odpowiedzialność prawną i finansową za prawidłowość Twoich rozliczeń.',
+    title: 'Odpowiedzialność umowna',
+    description: 'Zakres odpowiedzialności określamy przejrzyście w umowie i procedurach współpracy.',
   },
   {
     icon: Ban,
-    title: 'Zero kar z US',
-    description: 'Z nami nie musisz obawiać się kontroli. Gwarantujemy zgodność z aktualnymi przepisami.',
+    title: 'Minimalizacja ryzyka podatkowego',
+    description: 'Pracujemy na aktualnych przepisach i procedurach kontrolnych, aby ograniczać ryzyko błędów i korekt.',
   },
 ];
 
@@ -33,7 +33,7 @@ export function Guarantees() {
             Bezpieczeństwo przede wszystkim
           </h2>
           <p className="text-lg text-slate-400">
-            Współpraca z nami to spokój ducha. Chronimy Twój biznes na każdym kroku.
+            Współpraca z nami to spokój i przewidywalność. Chronimy Twoją firmę na każdym etapie rozliczeń.
           </p>
         </div>
 
@@ -45,9 +45,9 @@ export function Guarantees() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-slate-800/50 rounded-3xl p-8 border border-slate-700/50 hover:bg-slate-800 transition-colors hover:border-emerald-500/30 group"
+              className="bg-slate-800/50 rounded-3xl p-8 border border-slate-700/50 hover:bg-slate-800 transition-colors hover:border-blue-500/30 group"
             >
-              <div className="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 text-emerald-400 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 text-blue-400 group-hover:scale-110 transition-transform duration-300">
                 <item.icon size={32} strokeWidth={1.5} />
               </div>
               <h3 className="text-xl font-bold mb-3 text-white">{item.title}</h3>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/src/components/ui/button';
 import { SITE_CONFIG } from '@/src/constants';
@@ -7,6 +7,8 @@ import { Link, useLocation } from 'react-router-dom';
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileNavRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
@@ -18,13 +20,62 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname, location.hash]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      document.body.style.overflow = '';
+      return;
+    }
+
+    document.body.style.overflow = 'hidden';
+
+    const focusableElements = mobileNavRef.current?.querySelectorAll<HTMLElement>(
+      'a, button, [tabindex]:not([tabindex="-1"])',
+    );
+    const firstElement = focusableElements?.[0];
+    const lastElement = focusableElements?.[focusableElements.length - 1];
+
+    firstElement?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+        menuButtonRef.current?.focus();
+        return;
+      }
+
+      if (event.key !== 'Tab' || !firstElement || !lastElement) {
+        return;
+      }
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
+
   const navLinks = [
-    { name: 'Usługi', href: '/#uslugi' },
-    { name: 'Panel', href: '/#panel' },
-    { name: 'Opinie', href: '/#opinie' },
-    { name: 'Zespół', href: '/#zespol' },
-    { name: 'Wiedza', href: '/#wiedza' },
-    { name: 'Kontakt', href: '/#kontakt' },
+    { name: 'Usługi', to: { pathname: '/', hash: '#uslugi' } },
+    { name: 'Kalkulator', to: { pathname: '/', hash: '#kalkulator' } },
+    { name: 'Pakiety', to: { pathname: '/', hash: '#pakiety' } },
+    { name: 'O nas', to: '/o-nas' },
+    { name: 'Wiedza', to: '/wiedza' },
+    { name: 'FAQ', to: { pathname: '/', hash: '#faq' } },
+    { name: 'Kontakt', to: { pathname: '/', hash: '#kontakt' } },
   ];
 
   const isTransparent = isHomePage && !isScrolled;
@@ -43,6 +94,17 @@ export function Navbar() {
           <span className={`font-bold text-xl tracking-tight ${!isTransparent ? 'text-slate-900' : 'text-white'}`}>
             {SITE_CONFIG.name}
           </span>
+          {SITE_CONFIG.isDemo && (
+            <span
+              className={`text-[10px] font-bold uppercase tracking-wider rounded-full px-2 py-1 border ${
+                !isTransparent
+                  ? 'bg-blue-50 text-blue-700 border-blue-200'
+                  : 'bg-white/10 text-blue-200 border-white/30'
+              }`}
+            >
+              Demo
+            </span>
+          )}
         </Link>
 
         {/* Desktop Nav */}
@@ -50,28 +112,32 @@ export function Navbar() {
           <ul className="flex items-center gap-6">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <a
-                  href={link.href}
-                  className={`text-sm font-medium transition-colors ${
-                    !isTransparent 
-                      ? 'text-slate-600 hover:text-blue-600' 
+                <Link
+                    to={link.to}
+                    className={`text-sm font-medium transition-colors ${
+                      !isTransparent
+                        ? 'text-slate-600 hover:text-blue-600'
                       : 'text-slate-200 hover:text-white'
                   }`}
                 >
                   {link.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
           <Button asChild className="rounded-full px-6 bg-blue-600 hover:bg-blue-700 text-white">
-            <a href="/#kontakt">Darmowa Konsultacja</a>
+            <Link to={{ pathname: '/', hash: '#kontakt' }}>Umów konsultację</Link>
           </Button>
         </nav>
 
         {/* Mobile Menu Toggle */}
         <button
+          ref={menuButtonRef}
           className={`md:hidden p-2 ${!isTransparent ? 'text-slate-600' : 'text-white'}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-navigation"
+          aria-label={isMobileMenuOpen ? 'Zamknij menu' : 'Otwórz menu'}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -79,24 +145,31 @@ export function Navbar() {
 
       {/* Mobile Nav */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-slate-100 shadow-lg py-4 px-4 flex flex-col gap-4">
+        <div
+          id="mobile-navigation"
+          ref={mobileNavRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu główne"
+          className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-slate-100 shadow-lg py-4 px-4 flex flex-col gap-4"
+        >
           <ul className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <a
-                  href={link.href}
+                <Link
+                  to={link.to}
                   className="text-base font-medium text-slate-700 block"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
           <Button asChild className="w-full mt-2 bg-blue-600 hover:bg-blue-700 text-white">
-            <a href="/#kontakt" onClick={() => setIsMobileMenuOpen(false)}>
-              Darmowa Konsultacja
-            </a>
+            <Link to={{ pathname: '/', hash: '#kontakt' }} onClick={() => setIsMobileMenuOpen(false)}>
+              Umów konsultację
+            </Link>
           </Button>
         </div>
       )}

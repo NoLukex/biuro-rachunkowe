@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Button } from '@/src/components/ui/button';
 import { LayoutDashboard, Smartphone, Zap, ShieldCheck } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function ClientPanel() {
   return (
@@ -17,7 +18,7 @@ export function ClientPanel() {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-sm font-semibold mb-6 border border-blue-500/20">
               <Zap className="h-4 w-4" />
-              Real-time KSeF
+              KSeF w czasie rzeczywistym
             </div>
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
               Twój biznes w zasięgu ręki, 24/7
@@ -32,7 +33,7 @@ export function ClientPanel() {
                   <LayoutDashboard className="h-6 w-6 text-blue-400" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-lg mb-1">Intuicyjny Dashboard</h4>
+                  <h4 className="font-semibold text-lg mb-1">Przejrzysty panel</h4>
                   <p className="text-slate-400 text-sm">Wszystkie kluczowe wskaźniki w jednym miejscu.</p>
                 </div>
               </div>
@@ -41,7 +42,7 @@ export function ClientPanel() {
                   <Smartphone className="h-6 w-6 text-blue-400" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-lg mb-1">Aplikacja Mobilna</h4>
+                  <h4 className="font-semibold text-lg mb-1">Aplikacja mobilna</h4>
                   <p className="text-slate-400 text-sm">Skanuj paragony i wysyłaj faktury prosto z telefonu.</p>
                 </div>
               </div>
@@ -66,7 +67,7 @@ export function ClientPanel() {
             </div>
 
             <Button size="lg" className="h-14 px-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base" asChild>
-              <a href="/login">Zaloguj się do panelu</a>
+              <Link to={{ pathname: '/', hash: '#kontakt' }}>Umów konsultację</Link>
             </Button>
           </motion.div>
 
@@ -78,7 +79,7 @@ export function ClientPanel() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 rounded-3xl blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-indigo-500/20 rounded-3xl blur-3xl" />
             <div className="relative bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[500px]">
               {/* Browser Chrome */}
               <div className="h-12 bg-slate-900 border-b border-slate-700 flex items-center px-4 gap-2">
@@ -127,12 +128,7 @@ export function ClientPanel() {
                 {/* Chart placeholder */}
                 <div className="flex-1 bg-slate-800 rounded-xl border border-slate-700 p-4 flex flex-col relative overflow-hidden">
                   <p className="text-sm font-medium text-slate-300 mb-4 z-10">Wykres przychodów i kosztów</p>
-                  <div className="absolute inset-0 top-12 opacity-50" style={{
-                    backgroundImage: 'url("https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop")',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    mixBlendMode: 'luminosity'
-                  }} />
+                  <div className="absolute inset-0 top-12 opacity-60 bg-[radial-gradient(circle_at_20%_30%,rgba(59,130,246,0.35),transparent_45%),radial-gradient(circle_at_85%_10%,rgba(16,185,129,0.25),transparent_35%),radial-gradient(circle_at_70%_80%,rgba(148,163,184,0.3),transparent_45%)]" />
                   <div className="flex-1 flex items-end gap-2 z-10">
                     {[40, 60, 30, 80, 50, 90, 70].map((h, i) => (
                       <div key={i} className="flex-1 flex flex-col justify-end gap-1 h-full">

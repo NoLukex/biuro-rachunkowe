@@ -2,6 +2,8 @@ import { motion } from 'motion/react';
 import { CheckCircle2, Smartphone, Zap, Bell, ArrowRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { SITE_CONFIG } from '../constants';
+import { Link } from 'react-router-dom';
+import { SERVICE_PRICING } from '../content/pricing';
 
 export function KpirRyczalt() {
   return (
@@ -13,10 +15,10 @@ export function KpirRyczalt() {
           className="max-w-3xl mx-auto text-center mb-16"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            KPiR i Ryczałt dla JDG w {SITE_CONFIG.city}
+            KPiR i ryczałt dla JDG w {SITE_CONFIG.cityForms.locative}
           </h1>
           <p className="text-xl text-slate-600">
-            Maksymalizacja zysku "na rękę", święty spokój od ZUS i US.
+            Maksymalizacja zysku "na rękę" i spokojne rozliczenia z ZUS oraz urzędem skarbowym.
             Księgowość bez papieru, wystarczy smartfon.
           </p>
         </motion.div>
@@ -60,14 +62,14 @@ export function KpirRyczalt() {
               <div className="flex gap-4">
                 <Zap className="w-8 h-8 text-blue-600 shrink-0" />
                 <div>
-                  <h3 className="font-semibold mb-1">Optymalizacja Podatkowa</h3>
-                  <p className="text-sm text-slate-600">Dobieramy formę opodatkowania tak, abyś płacił jak najmniej (Ryczałt vs Liniowy).</p>
+                  <h3 className="font-semibold mb-1">Optymalizacja podatkowa</h3>
+                  <p className="text-sm text-slate-600">Dobieramy formę opodatkowania tak, abyś płacił jak najmniej (ryczałt vs podatek liniowy).</p>
                 </div>
               </div>
               <div className="flex gap-4">
                 <Smartphone className="w-8 h-8 text-blue-600 shrink-0" />
                 <div>
-                  <h3 className="font-semibold mb-1">Aplikacja Mobilna</h3>
+                  <h3 className="font-semibold mb-1">Aplikacja mobilna</h3>
                   <p className="text-sm text-slate-600">Wystawiasz faktury i skanujesz koszty prosto z telefonu.</p>
                 </div>
               </div>
@@ -109,13 +111,13 @@ export function KpirRyczalt() {
         <div className="bg-slate-900 text-white rounded-3xl p-8 md:p-12 text-center">
           <h2 className="text-3xl font-bold mb-6">Zacznij oszczędzać czas i pieniądze</h2>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Ceny KPiR / Ryczałtu zaczynają się od 250 zł netto / mc.
-            Zobacz pełny cennik pakietów.
-          </p>
+             Ceny KPiR / ryczałtu zaczynają się od {SERVICE_PRICING.kpirRyczalt.replace('/mc', ' netto / mc')}.
+             Zobacz pełny cennik pakietów.
+           </p>
           <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white text-lg h-14 px-8" asChild>
-            <a href="/#uslugi">
+            <Link to={{ pathname: '/', hash: '#uslugi' }}>
               Sprawdź pakiety <ArrowRight className="ml-2 w-5 h-5" />
-            </a>
+            </Link>
           </Button>
         </div>
       </div>

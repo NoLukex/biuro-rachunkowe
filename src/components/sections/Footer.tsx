@@ -3,6 +3,22 @@ import { Facebook, Linkedin, Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function Footer() {
+  const socialLinks = [
+    { key: 'facebook', href: SITE_CONFIG.socials.facebook, icon: Facebook, label: 'Facebook' },
+    { key: 'linkedin', href: SITE_CONFIG.socials.linkedin, icon: Linkedin, label: 'LinkedIn' },
+    { key: 'instagram', href: SITE_CONFIG.socials.instagram, icon: Instagram, label: 'Instagram' },
+  ].filter((item) => item.href);
+
+  const quickLinks = [
+    { label: 'Nasze usługi', to: { pathname: '/', hash: '#uslugi' } },
+    { label: 'Kalkulator ceny', to: { pathname: '/', hash: '#kalkulator' } },
+    { label: 'Pakiety współpracy', to: { pathname: '/', hash: '#pakiety' } },
+    { label: 'O nas', to: '/o-nas' },
+    { label: 'Baza wiedzy', to: '/wiedza' },
+    { label: 'FAQ', to: { pathname: '/', hash: '#faq' } },
+    { label: 'Kontakt', to: { pathname: '/', hash: '#kontakt' } },
+  ];
+
   return (
     <footer className="bg-slate-950 text-slate-400 py-16 border-t border-slate-900">
       <div className="container mx-auto px-4 md:px-6">
@@ -18,30 +34,40 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-sm leading-relaxed mb-6">
-              Nowoczesne biuro rachunkowe w {SITE_CONFIG.city}. Pełna automatyzacja, obsługa KSeF i doradztwo podatkowe dla wymagających.
+              Nowoczesne biuro rachunkowe w {SITE_CONFIG.cityForms.locative}. Pełna automatyzacja, obsługa KSeF i doradztwo podatkowe dla wymagających.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors">
-                <Linkedin size={20} />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors">
-                <Instagram size={20} />
-              </a>
-            </div>
+            {socialLinks.length > 0 && (
+              <div className="flex gap-4">
+                {socialLinks.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <a
+                      key={social.key}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                      className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors"
+                    >
+                      <Icon size={20} />
+                    </a>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Links */}
           <div>
             <h4 className="text-white font-semibold mb-6">Na skróty</h4>
             <ul className="space-y-4 text-sm">
-              <li><a href="/#uslugi" className="hover:text-blue-400 transition-colors">Nasze usługi</a></li>
-              <li><a href="/#panel" className="hover:text-blue-400 transition-colors">Panel klienta</a></li>
-              <li><a href="/#opinie" className="hover:text-blue-400 transition-colors">Opinie klientów</a></li>
-              <li><a href="/#zespol" className="hover:text-blue-400 transition-colors">Nasz zespół</a></li>
-              <li><a href="/#wiedza" className="hover:text-blue-400 transition-colors">Baza wiedzy</a></li>
+              {quickLinks.map((link) => (
+                <li key={link.label}>
+                  <Link to={link.to} className="hover:text-blue-400 transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -81,7 +107,7 @@ export function Footer() {
             <h4 className="text-white font-semibold mb-6">Lokalizacja</h4>
             <div className="w-full h-48 rounded-xl overflow-hidden bg-slate-800">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d155859.34960144124!2d16.781845199999996!3d52.40066315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470444d2ece10ab7%3A0xa4ea31980334bfd1!2sPozna%C5%84!5e0!3m2!1spl!2spl!4v1709538421000!5m2!1spl!2spl" 
+                src={SITE_CONFIG.mapEmbedUrl}
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 
@@ -95,14 +121,19 @@ export function Footer() {
         </div>
 
         <div className="pt-8 border-t border-slate-900 text-sm flex flex-col md:flex-row justify-between items-center gap-4">
-          <p>&copy; {new Date().getFullYear()} {SITE_CONFIG.name}. Wszelkie prawa zastrzeżone.</p>
+          <div className="text-center md:text-left">
+            <p>&copy; {new Date().getFullYear()} {SITE_CONFIG.name}. Wszelkie prawa zastrzeżone.</p>
+            {SITE_CONFIG.isDemo && (
+              <p className="text-xs text-blue-300 mt-1">Wersja demonstracyjna - dane i treści wymagają personalizacji przed publikacją.</p>
+            )}
+          </div>
           <div className="flex gap-6">
-            <a href="/polityka-prywatnosci" className="hover:text-blue-400 transition-colors">
+            <Link to="/polityka-prywatnosci" className="hover:text-blue-400 transition-colors">
               Polityka prywatności (RODO)
-            </a>
-            <a href="/regulamin" className="hover:text-blue-400 transition-colors">
+            </Link>
+            <Link to="/regulamin" className="hover:text-blue-400 transition-colors">
               Regulamin
-            </a>
+            </Link>
           </div>
         </div>
       </div>

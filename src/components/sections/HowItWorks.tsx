@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { PhoneCall, FileSignature, RefreshCw, Smartphone, PieChart } from 'lucide-react';
 
 const steps = [
@@ -14,7 +13,7 @@ const steps = [
   },
   {
     icon: RefreshCw,
-    title: 'Szybki Onboarding',
+    title: 'Szybkie wdrożenie',
     description: 'Pomagamy wypowiedzieć umowę poprzedniemu biuru i przenosimy Twoje dane do naszego systemu. Konfigurujemy dostęp do KSeF.'
   },
   {
@@ -31,7 +30,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="py-24 bg-white" id="jak-to-dziala">
+    <section className="py-24 bg-slate-100" id="jak-to-dziala">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">
@@ -44,14 +43,7 @@ export function HowItWorks() {
 
         <div className="max-w-4xl mx-auto">
           {steps.map((step, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative flex gap-6 pb-12 last:pb-0"
-            >
+            <div key={index} className="relative flex gap-6 pb-12 last:pb-0">
               {/* Line connecting steps */}
               {index !== steps.length - 1 && (
                 <div className="absolute left-6 top-14 bottom-0 w-px bg-blue-100" />
@@ -65,7 +57,7 @@ export function HowItWorks() {
                 <h3 className="text-xl font-bold text-slate-900 mb-2">{step.title}</h3>
                 <p className="text-slate-600 leading-relaxed">{step.description}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
