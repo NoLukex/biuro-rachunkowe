@@ -1,24 +1,24 @@
 import { motion } from 'motion/react';
-import { ShieldAlert, PiggyBank, Scale, CheckCircle } from 'lucide-react';
+import { ShieldCheck, RotateCcw, AlertCircle, Ban } from 'lucide-react';
 
 const guarantees = [
   {
-    icon: PiggyBank,
+    icon: RotateCcw,
     title: 'Zwrot 100% w 30 dni',
     description: 'Jeśli nie będziesz zadowolony z naszych usług w pierwszym miesiącu, oddamy Ci pieniądze bez pytań.',
   },
   {
-    icon: ShieldAlert,
+    icon: ShieldCheck,
     title: 'OC na 2 000 000 zł',
     description: 'Posiadamy ubezpieczenie od odpowiedzialności cywilnej na kwotę 2 milionów złotych.',
   },
   {
-    icon: Scale,
+    icon: AlertCircle,
     title: 'Odpowiedzialność za błędy',
     description: 'Bierzemy pełną odpowiedzialność prawną i finansową za prawidłowość Twoich rozliczeń.',
   },
   {
-    icon: CheckCircle,
+    icon: Ban,
     title: 'Zero kar z US',
     description: 'Z nami nie musisz obawiać się kontroli. Gwarantujemy zgodność z aktualnymi przepisami.',
   },
@@ -26,13 +26,13 @@ const guarantees = [
 
 export function Guarantees() {
   return (
-    <section className="py-24 bg-emerald-900 text-white" id="gwarancje">
+    <section className="py-24 bg-slate-900 text-white" id="gwarancje">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-white">
             Bezpieczeństwo przede wszystkim
           </h2>
-          <p className="text-lg text-emerald-100/80">
+          <p className="text-lg text-slate-400">
             Współpraca z nami to spokój ducha. Chronimy Twój biznes na każdym kroku.
           </p>
         </div>
@@ -45,13 +45,13 @@ export function Guarantees() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-emerald-800/50 rounded-2xl p-8 border border-emerald-700/50 hover:bg-emerald-800 transition-colors"
+              className="bg-slate-800/50 rounded-3xl p-8 border border-slate-700/50 hover:bg-slate-800 transition-colors hover:border-emerald-500/30 group"
             >
-              <div className="w-14 h-14 bg-emerald-700 rounded-xl flex items-center justify-center mb-6 text-emerald-300">
-                <item.icon size={28} strokeWidth={1.5} />
+              <div className="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mb-6 text-emerald-400 group-hover:scale-110 transition-transform duration-300">
+                <item.icon size={32} strokeWidth={1.5} />
               </div>
               <h3 className="text-xl font-bold mb-3 text-white">{item.title}</h3>
-              <p className="text-emerald-100/70 leading-relaxed">
+              <p className="text-slate-400 leading-relaxed">
                 {item.description}
               </p>
             </motion.div>

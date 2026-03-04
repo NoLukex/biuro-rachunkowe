@@ -15,7 +15,7 @@ export function ClientPanel() {
             transition={{ duration: 0.6 }}
             className="max-w-2xl"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-semibold mb-6 border border-emerald-500/20">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-sm font-semibold mb-6 border border-blue-500/20">
               <Zap className="h-4 w-4" />
               Real-time KSeF
             </div>
@@ -29,7 +29,7 @@ export function ClientPanel() {
             <div className="grid sm:grid-cols-2 gap-8 mb-10">
               <div className="flex gap-4">
                 <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center shrink-0">
-                  <LayoutDashboard className="h-6 w-6 text-emerald-400" />
+                  <LayoutDashboard className="h-6 w-6 text-blue-400" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-lg mb-1">Intuicyjny Dashboard</h4>
@@ -38,7 +38,7 @@ export function ClientPanel() {
               </div>
               <div className="flex gap-4">
                 <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center shrink-0">
-                  <Smartphone className="h-6 w-6 text-emerald-400" />
+                  <Smartphone className="h-6 w-6 text-blue-400" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-lg mb-1">Aplikacja Mobilna</h4>
@@ -47,7 +47,7 @@ export function ClientPanel() {
               </div>
               <div className="flex gap-4">
                 <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center shrink-0">
-                  <Zap className="h-6 w-6 text-emerald-400" />
+                  <Zap className="h-6 w-6 text-blue-400" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-lg mb-1">Automat KSeF</h4>
@@ -56,7 +56,7 @@ export function ClientPanel() {
               </div>
               <div className="flex gap-4">
                 <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center shrink-0">
-                  <ShieldCheck className="h-6 w-6 text-emerald-400" />
+                  <ShieldCheck className="h-6 w-6 text-blue-400" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-lg mb-1">Bezpieczeństwo</h4>
@@ -65,7 +65,7 @@ export function ClientPanel() {
               </div>
             </div>
 
-            <Button size="lg" className="h-14 px-8 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-base" asChild>
+            <Button size="lg" className="h-14 px-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base" asChild>
               <a href="/login">Zaloguj się do panelu</a>
             </Button>
           </motion.div>
@@ -78,7 +78,7 @@ export function ClientPanel() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-blue-500/20 rounded-3xl blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 rounded-3xl blur-3xl" />
             <div className="relative bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[500px]">
               {/* Browser Chrome */}
               <div className="h-12 bg-slate-900 border-b border-slate-700 flex items-center px-4 gap-2">
@@ -100,7 +100,7 @@ export function ClientPanel() {
                     <h3 className="text-xl font-bold text-white">Podsumowanie miesiąca</h3>
                     <p className="text-sm text-slate-400">Marzec 2026</p>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold">
+                  <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold">
                     JD
                   </div>
                 </div>
@@ -110,7 +110,7 @@ export function ClientPanel() {
                   <div className="bg-slate-800 rounded-xl p-4 border border-slate-700">
                     <p className="text-xs text-slate-400 mb-1">Przychody</p>
                     <p className="text-lg font-bold text-white">45 200 zł</p>
-                    <p className="text-xs text-emerald-400 mt-1">+12% m/m</p>
+                    <p className="text-xs text-blue-400 mt-1">+12% m/m</p>
                   </div>
                   <div className="bg-slate-800 rounded-xl p-4 border border-slate-700">
                     <p className="text-xs text-slate-400 mb-1">Koszty</p>
@@ -125,12 +125,18 @@ export function ClientPanel() {
                 </div>
 
                 {/* Chart placeholder */}
-                <div className="flex-1 bg-slate-800 rounded-xl border border-slate-700 p-4 flex flex-col">
-                  <p className="text-sm font-medium text-slate-300 mb-4">Wykres przychodów i kosztów</p>
-                  <div className="flex-1 flex items-end gap-2">
+                <div className="flex-1 bg-slate-800 rounded-xl border border-slate-700 p-4 flex flex-col relative overflow-hidden">
+                  <p className="text-sm font-medium text-slate-300 mb-4 z-10">Wykres przychodów i kosztów</p>
+                  <div className="absolute inset-0 top-12 opacity-50" style={{
+                    backgroundImage: 'url("https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop")',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    mixBlendMode: 'luminosity'
+                  }} />
+                  <div className="flex-1 flex items-end gap-2 z-10">
                     {[40, 60, 30, 80, 50, 90, 70].map((h, i) => (
                       <div key={i} className="flex-1 flex flex-col justify-end gap-1 h-full">
-                        <div className="w-full bg-emerald-500/80 rounded-t-sm" style={{ height: `${h}%` }} />
+                        <div className="w-full bg-blue-500/80 rounded-t-sm" style={{ height: `${h}%` }} />
                         <div className="w-full bg-slate-600 rounded-t-sm" style={{ height: `${h * 0.4}%` }} />
                       </div>
                     ))}

@@ -32,10 +32,10 @@ export function Navbar() {
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <a href="#" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-xl leading-none">B</span>
           </div>
-          <span className={`font-bold text-xl tracking-tight ${isScrolled ? 'text-slate-900' : 'text-slate-900'}`}>
+          <span className={`font-bold text-xl tracking-tight ${isScrolled ? 'text-slate-900' : 'text-white'}`}>
             {SITE_CONFIG.name}
           </span>
         </a>
@@ -47,21 +47,25 @@ export function Navbar() {
               <li key={link.name}>
                 <a
                   href={link.href}
-                  className="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors"
+                  className={`text-sm font-medium transition-colors ${
+                    isScrolled 
+                      ? 'text-slate-600 hover:text-blue-600' 
+                      : 'text-slate-200 hover:text-white'
+                  }`}
                 >
                   {link.name}
                 </a>
               </li>
             ))}
           </ul>
-          <Button asChild variant="default" className="rounded-full px-6">
+          <Button asChild className="rounded-full px-6 bg-blue-600 hover:bg-blue-700 text-white">
             <a href="#kontakt">Darmowa Konsultacja</a>
           </Button>
         </nav>
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden p-2 text-slate-600"
+          className={`md:hidden p-2 ${isScrolled ? 'text-slate-600' : 'text-white'}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -84,7 +88,7 @@ export function Navbar() {
               </li>
             ))}
           </ul>
-          <Button asChild className="w-full mt-2">
+          <Button asChild className="w-full mt-2 bg-blue-600 hover:bg-blue-700 text-white">
             <a href="#kontakt" onClick={() => setIsMobileMenuOpen(false)}>
               Darmowa Konsultacja
             </a>

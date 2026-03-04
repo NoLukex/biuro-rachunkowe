@@ -1,15 +1,14 @@
 import { motion } from 'motion/react';
-import { Building2, ShoppingCart, CreditCard, Box, FileSpreadsheet, Server, Database, Cloud } from 'lucide-react';
 
 const integrations = [
-  { name: 'PKO BP', icon: Building2 },
-  { name: 'mBank', icon: CreditCard },
-  { name: 'ING', icon: Building2 },
-  { name: 'Xero', icon: FileSpreadsheet },
-  { name: 'Comarch', icon: Server },
-  { name: 'Allegro', icon: ShoppingCart },
-  { name: 'Shoper', icon: Box },
-  { name: 'KSeF', icon: Database },
+  { name: 'PKO BP', image: 'https://api.dicebear.com/9.x/initials/svg?seed=PKO&backgroundColor=f8fafc&textColor=64748b' },
+  { name: 'mBank', image: 'https://api.dicebear.com/9.x/initials/svg?seed=mBank&backgroundColor=f8fafc&textColor=64748b' },
+  { name: 'ING', image: 'https://api.dicebear.com/9.x/initials/svg?seed=ING&backgroundColor=f8fafc&textColor=64748b' },
+  { name: 'Xero', image: 'https://api.dicebear.com/9.x/initials/svg?seed=Xero&backgroundColor=f8fafc&textColor=64748b' },
+  { name: 'Comarch', image: 'https://api.dicebear.com/9.x/initials/svg?seed=Comarch&backgroundColor=f8fafc&textColor=64748b' },
+  { name: 'Allegro', image: 'https://api.dicebear.com/9.x/initials/svg?seed=Allegro&backgroundColor=f8fafc&textColor=64748b' },
+  { name: 'Shoper', image: 'https://api.dicebear.com/9.x/initials/svg?seed=Shoper&backgroundColor=f8fafc&textColor=64748b' },
+  { name: 'KSeF', image: 'https://api.dicebear.com/9.x/initials/svg?seed=KSeF&backgroundColor=f8fafc&textColor=64748b' },
 ];
 
 export function Integrations() {
@@ -25,7 +24,7 @@ export function Integrations() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-6 lg:gap-8">
           {integrations.map((integration, index) => (
             <motion.div
               key={index}
@@ -33,12 +32,15 @@ export function Integrations() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="bg-slate-50 rounded-2xl p-8 border border-slate-100 flex flex-col items-center justify-center gap-4 hover:bg-white hover:shadow-md transition-all duration-300 group"
+              className="bg-slate-50 rounded-2xl p-6 border border-slate-100 flex flex-col items-center justify-center gap-4 hover:bg-white hover:shadow-md transition-all duration-300 group grayscale hover:grayscale-0"
             >
-              <div className="w-16 h-16 bg-white rounded-full shadow-sm flex items-center justify-center text-slate-400 group-hover:text-emerald-600 group-hover:scale-110 transition-all duration-300">
-                <integration.icon size={32} strokeWidth={1.5} />
-              </div>
-              <span className="font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">
+              <img 
+                src={integration.image} 
+                alt={integration.name} 
+                className="w-12 h-12 object-contain opacity-70 group-hover:opacity-100 transition-opacity"
+                referrerPolicy="no-referrer"
+              />
+              <span className="font-semibold text-xs text-slate-500 group-hover:text-slate-900 transition-colors uppercase tracking-wider">
                 {integration.name}
               </span>
             </motion.div>

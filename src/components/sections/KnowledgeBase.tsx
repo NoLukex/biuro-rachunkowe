@@ -8,6 +8,7 @@ const articles = [
     date: '12 Mar 2026',
     excerpt: 'Praktyczny poradnik dla przedsiębiorców. Dowiedz się, jak wdrożyć Krajowy System e-Faktur bez stresu i kar.',
     slug: 'ksef-krok-po-kroku',
+    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=600&auto=format&fit=crop',
   },
   {
     title: 'Zmiany w VAT 2026. Co musisz wiedzieć?',
@@ -15,6 +16,7 @@ const articles = [
     date: '05 Mar 2026',
     excerpt: 'Nowe stawki, odliczenia i terminy. Sprawdź, jak zoptymalizować rozliczenia VAT w nowym roku podatkowym.',
     slug: 'zmiany-vat-2026',
+    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=600&auto=format&fit=crop',
   },
   {
     title: 'Optymalizacja składek ZUS dla B2B',
@@ -22,6 +24,7 @@ const articles = [
     date: '28 Lut 2026',
     excerpt: 'Mały ZUS Plus, ulga na start czy działalność nierejestrowana? Wybierz najlepszą opcję dla swojego biznesu.',
     slug: 'optymalizacja-zus-b2b',
+    image: 'https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?q=80&w=600&auto=format&fit=crop',
   },
   {
     title: 'Ulgi podatkowe, o których zapominasz',
@@ -29,12 +32,13 @@ const articles = [
     date: '15 Lut 2026',
     excerpt: 'Ulga IP Box, B+R, na robotyzację. Zobacz, z jakich odliczeń możesz skorzystać, by płacić niższe podatki.',
     slug: 'ulgi-podatkowe-2026',
+    image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=600&auto=format&fit=crop',
   },
 ];
 
 export function KnowledgeBase() {
   return (
-    <section className="py-24 bg-slate-50" id="wiedza">
+    <section className="py-24 bg-white" id="wiedza">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div className="max-w-2xl">
@@ -45,7 +49,7 @@ export function KnowledgeBase() {
               Bądź na bieżąco ze zmianami w prawie. Nasi eksperci tłumaczą skomplikowane przepisy na ludzki język.
             </p>
           </div>
-          <a href="/blog" className="inline-flex items-center gap-2 text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">
+          <a href="/blog" className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors">
             Zobacz wszystkie artykuły <ArrowRight className="w-5 h-5" />
           </a>
         </div>
@@ -58,17 +62,27 @@ export function KnowledgeBase() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full group"
+              className="bg-slate-50 rounded-3xl border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full group hover:-translate-y-1"
             >
-              <div className="p-6 flex-1 flex flex-col">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 text-xs font-semibold uppercase tracking-wider">
+              <div className="h-48 overflow-hidden relative">
+                <img 
+                  src={article.image} 
+                  alt={article.title} 
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute top-4 left-4">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm text-blue-700 text-xs font-bold uppercase tracking-wider shadow-sm">
                     <BookOpen className="w-3.5 h-3.5" />
                     {article.category}
                   </span>
-                  <span className="text-sm text-slate-400 font-medium">{article.date}</span>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors">
+              </div>
+              <div className="p-6 flex-1 flex flex-col">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-sm text-slate-500 font-medium">{article.date}</span>
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors leading-tight">
                   {article.title}
                 </h3>
                 <p className="text-slate-600 mb-6 flex-1 text-sm leading-relaxed">
@@ -76,7 +90,7 @@ export function KnowledgeBase() {
                 </p>
                 <a
                   href={`/blog/${article.slug}`}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 group-hover:text-emerald-600 transition-colors mt-auto"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 group-hover:text-blue-600 transition-colors mt-auto"
                 >
                   Czytaj więcej <ArrowRight className="w-4 h-4" />
                 </a>

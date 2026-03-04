@@ -8,6 +8,7 @@ import { Textarea } from '@/src/components/ui/textarea';
 import { Label } from '@/src/components/ui/label';
 import { SITE_CONFIG } from '@/src/constants';
 import { Phone, Mail, MapPin } from 'lucide-react';
+import { toast } from 'sonner';
 
 const contactSchema = z.object({
   name: z.string().min(2, { message: 'Imię musi mieć co najmniej 2 znaki' }),
@@ -31,7 +32,9 @@ export function Contact() {
   const onSubmit = async (data: ContactFormValues) => {
     console.log('Form data:', data);
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    alert('Wiadomość została wysłana. Skontaktujemy się z Tobą wkrótce.');
+    toast.success('Wiadomość została wysłana!', {
+      description: 'Skontaktujemy się z Tobą wkrótce.',
+    });
     reset();
   };
 
@@ -55,12 +58,12 @@ export function Contact() {
 
             <div className="flex flex-col gap-8">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center shrink-0">
-                  <Phone className="h-6 w-6 text-emerald-600" />
+                <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
+                  <Phone className="h-6 w-6 text-blue-600" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-lg text-slate-900 mb-1">Zadzwoń do nas</h4>
-                  <a href={`tel:${SITE_CONFIG.phone.replace(/\s/g, '')}`} className="text-2xl font-bold text-emerald-600 hover:text-emerald-700 transition-colors">
+                  <a href={`tel:${SITE_CONFIG.phone.replace(/\s/g, '')}`} className="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors">
                     {SITE_CONFIG.phone}
                   </a>
                   <p className="text-slate-500 text-sm mt-1">Pn-Pt: 8:00 - 16:00</p>
@@ -68,20 +71,20 @@ export function Contact() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center shrink-0">
-                  <Mail className="h-6 w-6 text-emerald-600" />
+                <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
+                  <Mail className="h-6 w-6 text-blue-600" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-lg text-slate-900 mb-1">Napisz maila</h4>
-                  <a href={`mailto:${SITE_CONFIG.email}`} className="text-lg font-medium text-slate-700 hover:text-emerald-600 transition-colors">
+                  <a href={`mailto:${SITE_CONFIG.email}`} className="text-lg font-medium text-slate-700 hover:text-blue-600 transition-colors">
                     {SITE_CONFIG.email}
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center shrink-0">
-                  <MapPin className="h-6 w-6 text-emerald-600" />
+                <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
+                  <MapPin className="h-6 w-6 text-blue-600" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-lg text-slate-900 mb-1">Odwiedź nas</h4>
@@ -150,7 +153,7 @@ export function Contact() {
                 {errors.message && <p className="text-sm text-red-500">{errors.message.message}</p>}
               </div>
 
-              <Button type="submit" size="lg" className="w-full h-14 text-base font-semibold" disabled={isSubmitting}>
+              <Button type="submit" size="lg" className="w-full h-14 text-base font-semibold bg-blue-600 hover:bg-blue-700 text-white" disabled={isSubmitting}>
                 {isSubmitting ? 'Wysyłanie...' : 'Wyślij zapytanie'}
               </Button>
               <p className="text-xs text-slate-500 text-center mt-4">
