@@ -4,7 +4,7 @@ import { LayoutDashboard, Smartphone, Zap, ShieldCheck } from 'lucide-react';
 
 export function ClientPanel() {
   return (
-    <section className="py-24 bg-slate-900 text-white overflow-hidden" id="panel">
+    <section className="py-24 bg-slate-950 text-white overflow-hidden" id="panel">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { 
   Calculator, 
@@ -5,7 +6,8 @@ import {
   Users, 
   FileCheck, 
   Lightbulb, 
-  BarChart 
+  BarChart,
+  ArrowRight
 } from 'lucide-react';
 
 const services = [
@@ -13,13 +15,15 @@ const services = [
     icon: Calculator,
     title: 'Pełna księgowość',
     description: 'Kompleksowe prowadzenie ksiąg rachunkowych dla spółek z o.o., S.A. i innych podmiotów.',
-    price: 'od 800 zł/mc',
+    price: 'od 1200 zł/mc',
+    link: '/pelna-ksiegowosc'
   },
   {
     icon: FileText,
     title: 'KPiR / Ryczałt',
     description: 'Uproszczona księgowość dla jednoosobowych działalności gospodarczych i spółek cywilnych.',
     price: 'od 250 zł/mc',
+    link: '/kpir-ryczalt'
   },
   {
     icon: Users,
@@ -68,19 +72,24 @@ export function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-2xl p-8 border border-slate-200 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+              className="bg-white rounded-2xl p-8 border border-slate-200 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col"
             >
               <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                 <service.icon size={28} strokeWidth={1.5} />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
-              <p className="text-slate-600 mb-6 leading-relaxed min-h-[4.5rem]">
+              <p className="text-slate-600 mb-6 leading-relaxed flex-grow">
                 {service.description}
               </p>
-              <div className="pt-6 border-t border-slate-100">
+              <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
                 <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">
                   {service.price}
                 </span>
+                {service.link && (
+                  <Link to={service.link} className="text-blue-600 hover:text-blue-700 flex items-center gap-1 text-sm font-medium">
+                    Szczegóły <ArrowRight className="w-4 h-4" />
+                  </Link>
+                )}
               </div>
             </motion.div>
           ))}

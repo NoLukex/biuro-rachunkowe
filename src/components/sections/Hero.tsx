@@ -63,8 +63,8 @@ export function Hero() {
               </a>
             </Button>
             <Button size="lg" variant="outline" className="w-full sm:w-auto text-base h-14 px-8 rounded-full border-slate-600 text-white hover:bg-slate-800 hover:text-white bg-transparent" asChild>
-              <a href="/login">
-                Zaloguj się do panelu klienta
+              <a href="#panel">
+                Zobacz demo panelu klienta
               </a>
             </Button>
           </motion.div>

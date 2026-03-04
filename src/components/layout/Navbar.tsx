@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/src/components/ui/button';
 import { SITE_CONFIG } from '@/src/constants';
+import { Link, useLocation } from 'react-router-dom';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,29 +19,31 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Usługi', href: '#uslugi' },
-    { name: 'Panel', href: '#panel' },
-    { name: 'Opinie', href: '#opinie' },
-    { name: 'Zespół', href: '#zespol' },
-    { name: 'Wiedza', href: '#wiedza' },
-    { name: 'Kontakt', href: '#kontakt' },
+    { name: 'Usługi', href: '/#uslugi' },
+    { name: 'Panel', href: '/#panel' },
+    { name: 'Opinie', href: '/#opinie' },
+    { name: 'Zespół', href: '/#zespol' },
+    { name: 'Wiedza', href: '/#wiedza' },
+    { name: 'Kontakt', href: '/#kontakt' },
   ];
+
+  const isTransparent = isHomePage && !isScrolled;
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'
+        !isTransparent ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-xl leading-none">B</span>
           </div>
-          <span className={`font-bold text-xl tracking-tight ${isScrolled ? 'text-slate-900' : 'text-white'}`}>
+          <span className={`font-bold text-xl tracking-tight ${!isTransparent ? 'text-slate-900' : 'text-white'}`}>
             {SITE_CONFIG.name}
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
@@ -48,7 +53,7 @@ export function Navbar() {
                 <a
                   href={link.href}
                   className={`text-sm font-medium transition-colors ${
-                    isScrolled 
+                    !isTransparent 
                       ? 'text-slate-600 hover:text-blue-600' 
                       : 'text-slate-200 hover:text-white'
                   }`}
@@ -59,13 +64,13 @@ export function Navbar() {
             ))}
           </ul>
           <Button asChild className="rounded-full px-6 bg-blue-600 hover:bg-blue-700 text-white">
-            <a href="#kontakt">Darmowa Konsultacja</a>
+            <a href="/#kontakt">Darmowa Konsultacja</a>
           </Button>
         </nav>
 
         {/* Mobile Menu Toggle */}
         <button
-          className={`md:hidden p-2 ${isScrolled ? 'text-slate-600' : 'text-white'}`}
+          className={`md:hidden p-2 ${!isTransparent ? 'text-slate-600' : 'text-white'}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -89,7 +94,7 @@ export function Navbar() {
             ))}
           </ul>
           <Button asChild className="w-full mt-2 bg-blue-600 hover:bg-blue-700 text-white">
-            <a href="#kontakt" onClick={() => setIsMobileMenuOpen(false)}>
+            <a href="/#kontakt" onClick={() => setIsMobileMenuOpen(false)}>
               Darmowa Konsultacja
             </a>
           </Button>

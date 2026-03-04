@@ -4,37 +4,37 @@ import { Star, Building2, Clock, FileCheck2 } from 'lucide-react';
 const testimonials = [
   {
     company: 'TechFlow Sp. z o.o.',
-    quote: 'Przejście na pełen KSeF było bezbolesne. Biuro zajęło się wszystkim, a my mamy podgląd na żywo w panelu. Polecam każdemu.',
+    quote: 'Przeszedłem do Ashen po tym, jak poprzednie biuro naraziło mnie na karę z US. Zespół przeprowadził audyt, wyprostował dokumenty i wdrożył panel online. Teraz oszczędzam 15% na podatkach i mam święty spokój.',
     author: 'Michał Kowalski, CEO',
     avatar: 'https://api.dicebear.com/9.x/initials/svg?seed=TechFlow&backgroundColor=1e40af',
   },
   {
     company: 'E-commerce Plus',
-    quote: 'Mamy tysiące faktur miesięcznie. Automatyzacja, którą wdrożyli, uratowała nam mnóstwo czasu. Zero błędów od 2 lat.',
+    quote: 'Mieliśmy problem z tysiącami faktur miesięcznie i ciągłymi błędami w KPiR. Wdrożyli nam pełną automatyzację i integrację z BaseLinkerem. Od 2 lat zero błędów i pełna kontrola nad marżą.',
     author: 'Anna Nowak, Właścicielka',
     avatar: 'https://api.dicebear.com/9.x/initials/svg?seed=Ecommerce&backgroundColor=047857',
   },
   {
     company: 'Studio Architektoniczne',
-    quote: 'Zawsze terminowo, zawsze profesjonalnie. Doradztwo podatkowe na najwyższym poziomie. Oszczędziliśmy sporo na podatkach.',
+    quote: 'Płaciliśmy ogromne podatki na liniówce. Po darmowej konsultacji przeszliśmy na ryczałt. Proces zmiany biura trwał 2 dni. Zyskaliśmy kilkadziesiąt tysięcy złotych rocznie w kieszeni.',
     author: 'Piotr Wiśniewski, Architekt',
     avatar: 'https://api.dicebear.com/9.x/initials/svg?seed=Studio&backgroundColor=be185d',
   },
   {
     company: 'Agencja Marketingowa',
-    quote: 'Aplikacja mobilna to sztos! Skanuję faktury kosztowe w biegu, a księgowa ma je od razu u siebie. Koniec z papierologią.',
+    quote: 'Gubiliśmy papierowe faktury kosztowe, co miesiąc był stres. Teraz skanuję wszystko aplikacją mobilną w biegu. Księgowa ma je od razu u siebie. Koniec z papierologią i stresem 20-go.',
     author: 'Katarzyna Lewandowska, Founder',
     avatar: 'https://api.dicebear.com/9.x/initials/svg?seed=Agencja&backgroundColor=b45309',
   },
   {
     company: 'Janusz-Pol Transport',
-    quote: 'Bałem się tego całego KSeF-u, ale wytłumaczyli mi wszystko krok po kroku. Teraz to nawet wygodniejsze niż papier.',
+    quote: 'Bałem się wdrożenia KSeF-u i kar z tym związanych. Zespół Ashen wytłumaczył mi wszystko krok po kroku i skonfigurował system. Teraz wystawianie faktur jest nawet wygodniejsze niż kiedyś.',
     author: 'Janusz Dąbrowski, Właściciel',
     avatar: 'https://api.dicebear.com/9.x/initials/svg?seed=Janusz&backgroundColor=4338ca',
   },
   {
     company: 'IT Consulting',
-    quote: 'Jako programista cenię sobie nowoczesne rozwiązania. Ich panel klienta i API do integracji z naszym systemem to mistrzostwo.',
+    quote: 'Szukałem biura, które rozumie specyfikę pracy programisty B2B. Ich panel klienta i powiadomienia SMS o podatkach to mistrzostwo. Zawsze wiem, ile i kiedy zapłacić ZUS.',
     author: 'Tomasz Zieliński, B2B',
     avatar: 'https://api.dicebear.com/9.x/initials/svg?seed=IT&backgroundColor=334155',
   },

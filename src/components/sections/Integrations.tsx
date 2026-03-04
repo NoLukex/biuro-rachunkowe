@@ -1,14 +1,14 @@
 import { motion } from 'motion/react';
 
 const integrations = [
-  { name: 'PKO BP', image: 'https://api.dicebear.com/9.x/initials/svg?seed=PKO&backgroundColor=f8fafc&textColor=64748b' },
-  { name: 'mBank', image: 'https://api.dicebear.com/9.x/initials/svg?seed=mBank&backgroundColor=f8fafc&textColor=64748b' },
-  { name: 'ING', image: 'https://api.dicebear.com/9.x/initials/svg?seed=ING&backgroundColor=f8fafc&textColor=64748b' },
-  { name: 'Xero', image: 'https://api.dicebear.com/9.x/initials/svg?seed=Xero&backgroundColor=f8fafc&textColor=64748b' },
-  { name: 'Comarch', image: 'https://api.dicebear.com/9.x/initials/svg?seed=Comarch&backgroundColor=f8fafc&textColor=64748b' },
-  { name: 'Allegro', image: 'https://api.dicebear.com/9.x/initials/svg?seed=Allegro&backgroundColor=f8fafc&textColor=64748b' },
-  { name: 'Shoper', image: 'https://api.dicebear.com/9.x/initials/svg?seed=Shoper&backgroundColor=f8fafc&textColor=64748b' },
-  { name: 'KSeF', image: 'https://api.dicebear.com/9.x/initials/svg?seed=KSeF&backgroundColor=f8fafc&textColor=64748b' },
+  { name: 'PKO BP', image: 'https://logo.clearbit.com/pkobp.pl' },
+  { name: 'mBank', image: 'https://logo.clearbit.com/mbank.pl' },
+  { name: 'ING', image: 'https://logo.clearbit.com/ing.pl' },
+  { name: 'Xero', image: 'https://logo.clearbit.com/xero.com' },
+  { name: 'Comarch', image: 'https://logo.clearbit.com/comarch.pl' },
+  { name: 'Allegro', image: 'https://logo.clearbit.com/allegro.pl' },
+  { name: 'Shoper', image: 'https://logo.clearbit.com/shoper.pl' },
+  { name: 'KSeF', image: 'https://logo.clearbit.com/gov.pl' },
 ];
 
 export function Integrations() {
@@ -39,6 +39,9 @@ export function Integrations() {
                 alt={integration.name} 
                 className="w-12 h-12 object-contain opacity-70 group-hover:opacity-100 transition-opacity"
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  e.currentTarget.src = `https://api.dicebear.com/9.x/initials/svg?seed=${integration.name}&backgroundColor=f8fafc&textColor=64748b`;
+                }}
               />
               <span className="font-semibold text-xs text-slate-500 group-hover:text-slate-900 transition-colors uppercase tracking-wider">
                 {integration.name}

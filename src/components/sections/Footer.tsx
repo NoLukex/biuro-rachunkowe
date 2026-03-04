@@ -1,5 +1,6 @@
 import { SITE_CONFIG } from '@/src/constants';
 import { Facebook, Linkedin, Instagram } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function Footer() {
   return (
@@ -8,14 +9,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <a href="#" className="flex items-center gap-2 mb-6">
+            <Link to="/" className="flex items-center gap-2 mb-6">
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-xl leading-none">B</span>
               </div>
               <span className="font-bold text-xl tracking-tight text-white">
                 {SITE_CONFIG.name}
               </span>
-            </a>
+            </Link>
             <p className="text-sm leading-relaxed mb-6">
               Nowoczesne biuro rachunkowe w {SITE_CONFIG.city}. Pełna automatyzacja, obsługa KSeF i doradztwo podatkowe dla wymagających.
             </p>
@@ -36,11 +37,11 @@ export function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-6">Na skróty</h4>
             <ul className="space-y-4 text-sm">
-              <li><a href="#uslugi" className="hover:text-blue-400 transition-colors">Nasze usługi</a></li>
-              <li><a href="#panel" className="hover:text-blue-400 transition-colors">Panel klienta</a></li>
-              <li><a href="#opinie" className="hover:text-blue-400 transition-colors">Opinie klientów</a></li>
-              <li><a href="#zespol" className="hover:text-blue-400 transition-colors">Nasz zespół</a></li>
-              <li><a href="#wiedza" className="hover:text-blue-400 transition-colors">Baza wiedzy</a></li>
+              <li><a href="/#uslugi" className="hover:text-blue-400 transition-colors">Nasze usługi</a></li>
+              <li><a href="/#panel" className="hover:text-blue-400 transition-colors">Panel klienta</a></li>
+              <li><a href="/#opinie" className="hover:text-blue-400 transition-colors">Opinie klientów</a></li>
+              <li><a href="/#zespol" className="hover:text-blue-400 transition-colors">Nasz zespół</a></li>
+              <li><a href="/#wiedza" className="hover:text-blue-400 transition-colors">Baza wiedzy</a></li>
             </ul>
           </div>
 
@@ -80,7 +81,7 @@ export function Footer() {
             <h4 className="text-white font-semibold mb-6">Lokalizacja</h4>
             <div className="w-full h-48 rounded-xl overflow-hidden bg-slate-800">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d156388.354385064!2d20.921112615438212!3d52.23306532087561!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecc669a869f01%3A0x72f0be2a88ead3fc!2sWarszawa!5e0!3m2!1spl!2spl!4v1709538421000!5m2!1spl!2spl" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d155859.34960144124!2d16.781845199999996!3d52.40066315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470444d2ece10ab7%3A0xa4ea31980334bfd1!2sPozna%C5%84!5e0!3m2!1spl!2spl!4v1709538421000!5m2!1spl!2spl" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 
